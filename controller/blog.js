@@ -24,7 +24,8 @@ async function user_addblog_and_render(req, res) {
       title: blog.title,
       body: blog.body,
       createdby:blog._id,
-      coverimageurl: req.file ? `../public/uploads/${req.file.filename}` : null
+      // coverimageurl: req.file ? `../public/uploads/${req.file.filename}` : null
+      coverimageurl:`/uploads/${req.file.filename}`
     });
 
     // Redirect the user to the "/blogs" page

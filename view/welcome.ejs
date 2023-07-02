@@ -2,36 +2,65 @@
 <html lang="en">
 <head>
     <%- include('./partials/header') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0/css/bootstrap.min.css">
+    <style>
+        .welcome-line {
+            animation: slideIn 1s ease-in;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-    
     <%- include('./partials/nav') %>
-    <%= blogs %>
-    <h1>hi welcome there</h1>
-    <% if (blogs.length === 0) { %>
-      <p>No blogs available</p>
-    <% } else { %>
-      <% blogs.forEach(blog => { %>
-        <div class="card" style="width: 18rem;">
-          <% if (blog.coverimageurl) { %>
-            <img src="<%= blog.coverimageurl %>" class="card-img-top" alt="...">
-          <% } else { %>
-            <img src="placeholder-image.jpg" class="card-img-top">
-          <% } %>
-          <div class="card-body">
-            <h5 class="card-title"><%= blog.title %></h5>
-            <p class="card-text"><%= blog.body %></p>
-            <a href="#" class="btn btn-primary">View</a>
-          </div>
+
+    <div class="container">
+        <div class="welcome-line">
+            <h1>Welcome to Blogify!</h1>
+            <p class="lead">Explore and discover amazing blog posts.</p>
         </div>
-      <% }) %>
-    <% } %>
-    
-
-    
-
-
+        <% if (blogs.length === 0) { %>
+            <p>No blogs available</p>
+        <% } else { %>
+            <div class="row">
+                <% blogs.forEach(blog => { %>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <% if (blog.coverimageurl) { %>
+                                <img src="<%= blog.coverimageurl%>" class="card-img-top" >
+                            <% } else { %> 
+                                <img src="placeholder-image.jpg" class="card-img-top">
+                            <% } %>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= blog.title %></h5>
+                                <p class="card-text"><%= blog.body %></p>
+                                <a href="#" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
 
     <%- include('./partials/scripts') %>
+    <script>
+        // Trigger animation on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const welcomeLine = document.querySelector('.welcome-line');
+            welcomeLine.style.opacity = '1';
+        });
+    </script>
 </body>
 </html>

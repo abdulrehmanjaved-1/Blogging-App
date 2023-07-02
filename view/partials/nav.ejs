@@ -1,90 +1,48 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/signup">Blogify</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/signup">Blogify</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <% if (locals.user) { %>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/blog/newblog">Add Blog</a>
           </li>
-          <% if (locals.user) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/blog/newblog">Add Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/blogs">MyBlog</a>
-            </li>
-            <% } else{%>
-              <li class="nav-item">
-                <a class="nav-link" href="/signup">Create Acount</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-              </li>
-            <% } %>
+          <li class="nav-item">
+            <a class="nav-link" href="/blogs">My Blog</a>
+          </li>
+        <% } else {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/signup">Create Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+        <% } %>
+        <% if (locals.user) { %>
           <li class="nav-item dropdown">
-            <% if (locals.user) { %>
-              <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <%= user.username  %>
-              </a>
-              <ul class="dropdown-menu">
-                <!-- <li><a class="dropdown-item" href="/login">Login</a></li> -->
-                <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
-              </ul>
-            <% } %>
-             
-             
+            <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= user.username %>
+            </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/login">Login</a></li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
+              <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
             </ul>
           </li>
+        <% } else { %>
           <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link" href="/login">Login</a>
           </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+        <% } %>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
     </div>
-  </nav>
-  <% if (locals.error) { %>
-    <div id="error-message" class="alert alert-danger fade-out" role="alert">
-      <%= locals.error %>
-    </div>
-  <% } %>
-
-  <style>
-    .fade-out {
-      animation: fade-out 3s ease-in-out;
-    }
-  
-    @keyframes fade-out {
-      0% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-        display: none;
-      }
-    }
-  </style>
-  
-  <script>
-    // Delay redirect to login page after 3 seconds
-    setTimeout(() => {
-    const errorMessage = document.querySelector('#error-message');
-    if (errorMessage) {
-      errorMessage.style.display = 'none';
-    }
-  }, 3000);
-  </script>
-  
-
+  </div>
+</nav>
