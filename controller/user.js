@@ -25,13 +25,11 @@ function new_user_signup(req, res) {
 async function user_login(req, res) {
   const { email, password } = req.body;
   const user = await Signup_model.findOne({ email });
-
   if (!user) {
     const error = "Incorrect email";
     return res.render("login", { error });
   }
   
-
   bcrypt
     .compare(password, user.password)
     .then((isPasswordMatched) => {
