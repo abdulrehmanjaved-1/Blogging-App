@@ -4,14 +4,14 @@ const cookieparser = require("cookie-parser");
 const app = express();
 const path = require("path");
 const route1 = require("./route/user");
+const connectToMongodb=require("./connection")
 require("dotenv").config();
 const PORT=process.env.PORT || 3000;
-const URL=process.env.URL;
-const connectToMongodb= require("./connection");
+// const URL=mongodb+srv://abdulrehmanjaved:abdul123abdul@cluster1.jywhpnb.mongodb.net/
 const {general_authentication} = require("./middlewares/auth");
 const route2 = require("./route/slash");
 const route3 = require("./route/blog");
-
+const URL=process.env.URL;
 // Function for MongoDB connection
 const database = "blogify"; // Replace 'your_database_name' with the actual name of your database
 const collection = "user";
